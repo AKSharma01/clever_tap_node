@@ -63,7 +63,8 @@ class CleverTap{
 			// console.log("response(apiCall): ", response)
 			return response.data
 		}).catch((error) => {
-			throw(error)
+			// console.log("error in apiCall: : ", error.response)
+			throw(error.response.data)
 		})
 	}
 
