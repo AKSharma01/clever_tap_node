@@ -49,7 +49,7 @@ class Events extends CleverTap{
 				this.cursor = response.next_cursor
 				console.log(String(this.count),"calling through next cursor")
 				this.count++;
-				await this.iterate()
+				this.iterate()
 			}else
 				throw({
 					message: "cursor not found"
