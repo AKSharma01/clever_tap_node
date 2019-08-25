@@ -23,7 +23,7 @@ class Events extends CleverTap{
 
 			if('cursor' in response){
 				this.cursor = response.cursor
-				await this.iterate()
+				this.iterate()
 			}else{
 				throw({
 					message: `cursor not found for event_name: ${eventName}`
