@@ -68,9 +68,12 @@ class Events extends CleverTap{
 				try{
 					record = JSON.stringify(record, null, 4)
 					// console.log("record: ", record)
-					if(!this.filewritten){
+					if(!fs.existsSync(this.subfolder))
+						fs.mkdirSync(this.subfolder);
+					this.filename = `${this.subfolder}/${this.body.event_name}-part-${Math.floor(this.count/10)}.json`
+					if(!fs.existsSync(this.filename)){
 						fs.writeFileSync(this.filename, record)
-						this.filewritten = true
+						// this.filewritten = true
 					}
 					else{
 						record = ","+record

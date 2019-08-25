@@ -13,6 +13,7 @@ class CleverTap{
 		this.ACCOUNT_REGION = process.env.CLEVERTAP_ACCOUNT_REGION
 		this.BATCH_SIZE = process.env.CLEVERTAP_BATCH_SIZE
 		this.basefolder = `${rootDir}/${process.env.FOLDER}`
+		this.subfolder = ''
 		this.filename = ''
 		this.count = 0
 		this.cursor = ''
@@ -42,7 +43,8 @@ class CleverTap{
 	initilize(eventName, from, to){
 		this.count = 0
 		this.filewritten = false
-		this.filename = `${this.basefolder}/${eventName}.json` 
+		this.subfolder = `${this.basefolder}/${eventName}`
+		// this.filename = `${this.subfolder}/${eventName}-part-${this.count}.json`
 		this.body = this.data(eventName, from, to)
 		this.axios = axios.create({
 			baseURL: this.BASE_URL,
