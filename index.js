@@ -37,8 +37,15 @@ const callEvent = async (eventname) => {
 
 let eventlist = eventJson.events
 ctevent.on('complete', () => {
-	console.log(`complete event called --> sequence: ${index+1}, event: ${eventlist[index]}`)
-	callEvent(eventlist[index++])
+	if(index == eventlist.length)
+		ctevent.logger({
+			message: "execution completed",
+			errorIdentifier: "execution_completed"
+		})
+	else{
+		console.log(`complete event called --> sequence: ${index+1}, event: ${eventlist[index]}`)
+		callEvent(eventlist[index++])
+	}
 })
 
 
