@@ -32,6 +32,7 @@ class Events extends CleverTap{
 		}catch(error) {
 			// console.log("error (event): ", error)
 			await this.logger(error)
+			this.emitter.emit('complete', {})
 		}
 	}
 
