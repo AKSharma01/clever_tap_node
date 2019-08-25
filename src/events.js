@@ -95,6 +95,11 @@ class Events extends CleverTap{
 	async logger(errorStack){
 		if(errorStack instanceof Object)
 			errorStack.errorIdentifier = this.body.event_name
+		else
+			errorStack = {
+				message: errorStack,
+				errorIdentifier: this.body.event_name
+			}
 		return slackMessanger.sendMessage('', errorStack).then((response) => {
 			console.log("response: ", response)
 			return response
