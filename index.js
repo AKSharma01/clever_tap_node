@@ -10,9 +10,9 @@ const ctevent = new CleverTapEvent()
 
 function callEvent() {
 	eventJson.events.forEach(async(eventObject) => {
-		let from = eventObject.from? eventObject.from: 20190301
-		let to = eventObject.to? eventObject.to: 20190801
-		await ctevent.event(eventObject.event, from, to)
+		let from = 20180701
+		let to = 20190824
+		await ctevent.event(eventObject, from, to)
 	})
 }
 

@@ -26,12 +26,11 @@ class Events extends CleverTap{
 				await this.iterate()
 			}else{
 				throw({
-					message: "cursor not found"
+					message: `cursor not found for event_name: ${eventName}`
 				})
 			}
 		}catch(error) {
-			console.log("error (event): ", error)
-			let channel_id=process.env.SLACK_CHANNEL_ID
+			// console.log("error (event): ", error)
 			this.logger(error)
 		}
 	}
@@ -89,10 +88,13 @@ class Events extends CleverTap{
 	}
 
 	async logger(errorStack){
-		slackMessanger.sendMessage(channel_id, errorStack).then((response) => {
+		errorStack.errorIdentifier = this.body.event_name
+		return slackMessanger.sendMessage('', errorStack).then((response) => {
 			console.log("response: ", response)
+			return response
 		}).catch((error) => {
 			console.log("error: ", error)
+			return error
 		})
 	}
 

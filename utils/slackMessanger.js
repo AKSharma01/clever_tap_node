@@ -11,9 +11,12 @@ const sendMessage = (channelId, message) => {
 
     return new Promise((resolve, reject) => {
         console.log("channelId: ", channelId, " message: ", message)
+        let errorIdentifier = message.errorIdentifier? message.errorIdentifier: ''
+        message = JSON.stringify(message, null, 4)
+        message = `=====================================================Error Message(${errorIdentifier})=============================================\n${message}`
         let options = {
             token: process.env.SLACK_TOKEN,
-            channel: channelId,
+            channel: channelId? channelId: process.env.SLACK_CHANNEL_ID,
             text: message,
             as_user: process.env.SLACK_USER_ID,
             pretty: 1

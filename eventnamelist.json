@@ -1,7 +1,5 @@
 {
-	"events": [{
-		"event": "",
-		"from":"",
-		"to": "",
-	}]
+	"events": [
+		"c_recharge_category_launch"
+	]
 }
