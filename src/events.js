@@ -31,7 +31,7 @@ class Events extends CleverTap{
 			}
 		}catch(error) {
 			// console.log("error (event): ", error)
-			this.logger(error)
+			await this.logger(error)
 		}
 	}
 
@@ -39,11 +39,11 @@ class Events extends CleverTap{
 		try{
 			let url = `${this.url}?cursor=${this.cursor}`,
 				method = 'post';
-
+			// console.log("console.lasdfasdfh: ", this.on)
 			let response = await this.apiCall(url, this.body, method)
 			console.log("response: ", response)
 			
-			this.records = response.records
+			this.records = response.records||[]
 			await this.jsonDump()
 			if('next_cursor' in response){
 				this.cursor = response.next_cursor
@@ -56,7 +56,8 @@ class Events extends CleverTap{
 				})
 		}catch(error){
 			console.log("error (iterate): ", error)
-			this.logger(error)
+			await this.logger(error)
+			this.emitter.emit('complete', {})
 		}
 	}
 
@@ -82,7 +83,7 @@ class Events extends CleverTap{
 			}
 			return Promise.resolve()
 		}catch(error){
-			this.logger(error)
+			await this.logger(error)
 			return Promise.reject(error)
 		}
 	}

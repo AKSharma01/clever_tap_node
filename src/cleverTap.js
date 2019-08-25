@@ -1,6 +1,9 @@
 'use strict';
 
 const axios = require('axios');
+const events = require('events');
+
+
 
 class CleverTap{
 	constructor() {
@@ -17,6 +20,7 @@ class CleverTap{
 		this.body = null
 		this.axios = null
 		this.filewritten = false
+		this.emitter = new events.EventEmitter();
 	}
 
 	headers(){
@@ -59,6 +63,10 @@ class CleverTap{
 		}).catch((error) => {
 			throw(error)
 		})
+	}
+
+	on(){
+		return this.emitter.on.apply(this.emitter, arguments)
 	}
 
 }
