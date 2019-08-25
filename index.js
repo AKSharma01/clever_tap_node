@@ -27,7 +27,7 @@ const callEvent = async (eventname) => {
 	try{
 		let from = 20180701
 		let to = 20190824
-		await ctevent.event(eventname, from, to)
+		await ctevent.event(eventname.trim(), from, to)
 	}catch(error){
 		console.log("error(callEvent): ", error)
 		ctevent.logger(error)
